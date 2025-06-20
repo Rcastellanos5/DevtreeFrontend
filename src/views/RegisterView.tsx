@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
-import axios  from "axios"
 import {useForm} from 'react-hook-form'
+import axios, {isAxiosError} from "axios"
 import type { RegisterForm } from "../types"
 import ErrorMesagge from "../components/ErrorMesagge"
-// the diferents components are initialized
- const initialvalutes:RegisterForm={
+
+export default function RegisterView(){
+    const initialvalutes:RegisterForm={
             name:"", 
             email:"",
             handle:"",
@@ -12,22 +13,29 @@ import ErrorMesagge from "../components/ErrorMesagge"
             password_confirmation:""
 
         }
-export default function RegisterView(){
-    const {register,watch,handleSubmit, formState:{errors}}=useForm({defaultValues:initialvalutes})
+
+
+
+    const {register,watch,handleSubmit, reset,formState:{errors}}=useForm({defaultValues:initialvalutes})
 //Register view
 //variable para escuchar los que se esta escribiendo en el campo 
 const password = watch('password')
+console.log("API URL:", import.meta.env.VITE_API_URL);
     const handleRegister =async(formData:RegisterForm)=>{
         try{
-           const response =await axios.post('http://localhost:3000/auth/register', formData)
-           console.log(response)
+           const {data} =await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, formData);
+           console.log(data)
+           reset();
 
         }
         catch(error){
-            console.log(error)
+            if (isAxiosError(error)&& error.response){
+                console.log(error.response.data.error)
+                }
+            }
         }
-    }
-    return(
+    
+    return( 
         <>
             <h1 className="text-4xl text-white font-bold">Crear cuenta</h1>
              <nav className="mt-10">
