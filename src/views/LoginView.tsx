@@ -15,10 +15,10 @@ export default function LoginView(){
     const {register, handleSubmit   , formState:{errors}}=useForm({defaultValues:initialValues})
     const handleLogin =async(formData:LoginForm)=>{
         try{
-            console.log("Buscando usuario");
+            console.log("Buscando usuario")
             const{data}=await api.post('/auth/login', formData)
             localStorage.setItem('AUTH_TOKEN',data)
-            
+            console.log(data)
 
 
         }catch(error){ 
@@ -80,7 +80,7 @@ export default function LoginView(){
         <nav className="mt-10">
             <Link className="text-center text-white text-lg block" 
                 to="/auth/register">
-                ¿No tienes cuenta?Crea una aqui 
+                ¿No tienes cuenta? Crea una aqui 
             </Link>
         </nav>
         </>

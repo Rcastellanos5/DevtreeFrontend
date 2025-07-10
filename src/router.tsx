@@ -4,7 +4,7 @@ import RegisterView from "./views/RegisterView";
 import LinkTreeView from "./views/LinkTreeView";
 import ProfileView from "./views/ProfileView";
 import AuthLayout from "./layouts/AuthLayout";
-import AppLayout from "./layouts/appLayout";
+import AppLayout from "./layouts/AppLayout";
 
 export default function Router(){
 
